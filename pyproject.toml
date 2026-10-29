@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "photo-rename"
+version = "1.0.0"
+description = "Rename photos and videos to their capture time, with a full metadata fallback chain and an undo journal."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Aykut Yılmaz" }]
+keywords = ["exif", "photos", "rename", "heic", "quicktime", "metadata"]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Utilities",
+]
+dependencies = ["Pillow>=10.0.0"]
+
+[project.optional-dependencies]
+heic = ["pillow-heif>=0.16.0"]
+dev = ["pillow-heif>=0.16.0", "pytest>=8.0.0", "ruff>=0.6.0"]
+
+[project.scripts]
+photo-rename = "photo_rename:main"
+
+[tool.setuptools]
+py-modules = ["photo_rename"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "UP", "S"]
+ignore = ["S603", "S607"]  # dis arac cagrilari kasitli: argv ile, kabuk yorumlamasi yok
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]  # testlerde assert normaldir

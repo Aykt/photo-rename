@@ -1,0 +1,4 @@
+Pillow>=10.0.0
+
+# Istege bagli: HEIC/HEIF okumak icin kurulmasi onerilir
+# pillow-heif>=0.16.0
